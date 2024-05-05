@@ -1,82 +1,149 @@
-import React, { useEffect } from "react";
+import React, { useContext, useState } from "react";
+import { SharedStateContext } from "../../App.jsx";
 
 function Filter() {
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.documentElement.offsetHeight
-      )
-        console.log("You have reached the end!");
-    };
+  const [role, setRole] = useState("All");
+  const [search, setSearch] = useState("");
+  const [experience, setExperience] = useState("");
+  const [type, setType] = useState("");
+  const [salary, setSalary] = useState("");
 
-    window.addEventListener("scroll", handleScroll);
+  const { setState } = useContext(SharedStateContext);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [window.scrollY]);
+  const handleChange = (e, key) => {
+    if (key === "role") {
+      setRole(e.target.value);
+    } else if (key === "search") {
+      setSearch(e.target.value);
+    } else if (key === "experience") {
+      setExperience(e.target.value);
+    } else if (key === "type") {
+      setType(e.target.value);
+    } else if (key === "salary") {
+      setSalary(e.target.value);
+    }
+    setState((preState) => ({
+      ...preState,
+      [key]: e.target.value,
+    }));
+  };
 
   return (
-    <div>
-      <h2>Top</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae nulla
-        quam omnis labore nisi? Eaque a beatae rem suscipit sit odio ratione
-        nesciunt sint similique error veniam accusamus, veritatis saepe corrupti
-        repudiandae? Velit sapiente veritatis molestiae sequi odit iste
-        cupiditate. Aperiam recusandae magni fugit, quas consectetur illum
-        aliquam tempora unde eligendi, ullam beatae iusto cumque itaque facilis
-        in sed? Saepe doloremque quia illo distinctio assumenda deleniti, culpa
-        obcaecati repellat at accusamus inventore tempore non! Consequatur
-        explicabo exercitationem omnis eaque, quis in labore asperiores officiis
-        eos fugiat expedita laboriosam deleniti accusantium fugit maxime
-        assumenda dolorem ipsum soluta molestias fuga voluptas. Soluta dolor
-        exercitationem culpa quo iure aperiam unde dignissimos fugiat totam
-        alias eligendi non dolorem, inventore distinctio saepe, dolorum at
-        recusandae doloremque, ipsa voluptas tempora. Eligendi exercitationem
-        deleniti optio illo, a obcaecati. Nemo cupiditate officia quaerat
-        itaque, est aspernatur officiis et unde neque illum hic repellendus eius
-        sunt quia iusto repudiandae, explicabo asperiores assumenda modi
-        molestias. Unde nobis tenetur repudiandae minima architecto ipsum iste
-        quos consectetur quod eos, porro, hic, assumenda sit amet error
-        reiciendis eius. Distinctio est omnis numquam repellat labore mollitia
-        odio eum voluptate consectetur? Est quod adipisci officia asperiores
-        quae maxime eos obcaecati sunt dolorum, dolores aliquam recusandae
-        aperiam quia temporibus exercitationem quam blanditiis qui ipsam ex
-        enim! Vero ratione distinctio obcaecati, voluptate impedit doloremque?
-        Incidunt, inventore facilis impedit blanditiis ab saepe quos quas
-        recusandae. Obcaecati non ab cum, mollitia fuga dicta cupiditate eos
-        ratione omnis. Nesciunt sed, eos est deserunt corporis consequatur minus
-        id sequi tempore quos deleniti eligendi ut quasi! Tenetur modi eaque
-        repellendus? Amet nam voluptatum id impedit minus. Itaque saepe soluta
-        illo fuga, quae perferendis recusandae rem accusamus iste ratione
-        deserunt, suscipit minus. Optio numquam eius cupiditate temporibus
-        corrupti quasi possimus, neque alias officia consectetur, porro odio
-        expedita, illum nulla qui. Ut assumenda deserunt error consectetur minus
-        fugiat cupiditate a harum eos eveniet voluptatum modi reiciendis facere
-        veritatis dolores nihil totam, quibusdam aliquid quo vel debitis. Nisi
-        at distinctio repellat in blanditiis nemo corporis hic quisquam
-        voluptate repellendus eligendi, dolores doloribus, ab minima sed
-        inventore? Mollitia asperiores est harum modi obcaecati debitis, eveniet
-        ut vero explicabo dolorem soluta dolor architecto ab numquam officiis
-        quod nobis reprehenderit saepe assumenda distinctio enim sed blanditiis?
-        Doloremque tenetur sequi alias distinctio officia facilis non
-        repudiandae voluptatum molestiae, soluta id ipsa error tempora. Vel iure
-        saepe quae quod autem enim nihil quis atque nam officiis. Debitis
-        eligendi, voluptatum vero numquam fuga repellat in iure atque ipsum
-        necessitatibus, itaque aliquid aperiam odit dolores aliquam pariatur
-        dicta, blanditiis tempora saepe explicabo nam. Maiores autem sit vero
-        voluptatem? Quasi esse voluptatibus id veniam enim quaerat
-        necessitatibus, voluptates minima atque hic, ratione corporis nostrum in
-        nisi perferendis dignissimos a animi repellendus. Iure, beatae. Iusto
-        tenetur, provident doloribus necessitatibus laborum ad sit eos tempora,
-        praesentium, et cumque! Minus repellat aperiam iusto unde quod quo sed
-        atque? Odit officia sit unde distinctio facilis, eius id nisi
-        reprehenderit qui odio error blanditiis animi impedit quasi porro
-        repellat sed excepturi quam dolor doloribus eum natus reiciendis enim.
-      </p>
-      <h2>Bottom</h2>
+    <div className="flex px-5 lg:px-10 gap-2 my-6 w-full">
+      <div className="relative w-full">
+        <select
+          value={role}
+          onChange={(e) => handleChange(e, "role")}
+          className="block text-sm appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        >
+          <option value="" disabled hidden>
+            Roles
+          </option>
+          <option value="All">All</option>
+          <option value="Frontend Developer">Frontend Developer</option>
+          <option value="IOS Developer">IOS Developer</option>
+          <option value="Team Lead">Team Lead</option>
+          <option value="Backend Developer">Backend Developer</option>
+        </select>
+        <div className="pointer-events-none text-sm absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg
+            className="fill-current h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M5 10l5 5 5-5z" />
+          </svg>
+        </div>
+      </div>
+      <div className="relative w-[50%] ">
+        <select
+          value={experience}
+          onChange={(e) => handleChange(e, "experience")}
+          className="block appearance-none w-full text-sm bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        >
+          <option selected disabled>
+            Experience
+          </option>
+          <option value="1 years">1 YOE</option>
+          <option value="2 years">2 YOE</option>
+          <option value="3 years">3 YOE</option>
+          <option value="4 years">4 YOE</option>
+          <option value="5 years">5 YOE</option>
+          <option value="6 years">6 YOE</option>
+          <option value="7 years">7 YOE</option>
+          <option value="8 years">8 YOE</option>
+          <option value="9 years">9 YOE</option>
+          <option value="10+ years">10+ YOE</option>
+        </select>
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg
+            className="fill-current h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M5 10l5 5 5-5z" />
+          </svg>
+        </div>
+      </div>
+      <div className="relative w-full max-sm:hidden">
+        <select
+          value={type}
+          onChange={(e) => handleChange(e, "type")}
+          className="block text-sm appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        >
+          <option value="" selected disabled hidden>
+            Job Type
+          </option>
+          <option value="remote">Remote</option>
+          <option value="hybrid">Hybrid</option>
+          <option value="onsite">Onsite</option>
+          {/* Add more job types as needed */}
+        </select>
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg
+            className="fill-current h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M5 10l5 5 5-5z" />
+          </svg>
+        </div>
+      </div>
+      <div className="relative w-full max-sm:hidden">
+        <select
+          value={salary}
+          onChange={(e) => handleChange(e, "salary")}
+          className="block text-sm appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        >
+          <option value="" selected disabled hidden>
+            Minimum Salary
+          </option>
+          <option value="0-50,000">0-50,000</option>
+          <option value="50,001-75,000">50,001-75,000</option>
+          <option value="75,001-100,000">75,001-100,000</option>
+          <option value="100,001+">100,001+</option>
+        </select>
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg
+            className="fill-current h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M5 10l5 5 5-5z" />
+          </svg>
+        </div>
+      </div>
+      <div className="relative w-full max-sm:hidden">
+        <div className="rounded shadow focus:outline-none focus:shadow-outline border w-full border-gray-400 hover:border-gray-500 text-sm absolute inset-y-0  flex items-center text-start text-gray-700">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => handleChange(e, "search")}
+            placeholder="Search Company"
+            className="w-full border-transparent outline-none text-start px-2 py-1 placeholder:text-gray-600"
+          />
+        </div>
+      </div>
     </div>
   );
 }
