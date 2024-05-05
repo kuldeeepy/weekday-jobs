@@ -1,12 +1,12 @@
 import "./App.css";
-import CardWrap from "./components/CardWrap.jsx";
+import Wrapper from "./components/Container/Wrapper.jsx";
 import Filter from "./components/Filter/Filter";
 
 function App() {
   return (
     <div>
       <h2>Hello WeekDay!</h2>
-      {<CardWrap />}
+      {<Wrapper />}
       {/* {<Card />} */}
     </div>
   );

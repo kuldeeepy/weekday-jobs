@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import instance from "../worker/Instance";
+import instance from "../../worker/Instance.js";
 const url = import.meta.env.VITE_API_URL;
-import Card from "./Card/Card.jsx";
+import Card from "../Card/Card.jsx";
 
 function CardWrap() {
   const [jobs, setJobs] = useState([]);
@@ -25,7 +25,6 @@ function CardWrap() {
           setOffset((prevOffset) => prevOffset + limit);
           setHasMoreData(res.data.jdList.length === limit);
           setLoading(false);
-          console.log(res);
         })
         .catch((err) => {
           setLoading(false);
@@ -52,12 +51,16 @@ function CardWrap() {
   if (error) return <h2>{error}</h2>;
 
   return (
-    <>
+    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-6 px-5 py-5">
       {jobs?.map((job, idx) => (
         <Card key={idx} job={job} />
       ))}
-      {loading && <h2>Loading..</h2>}
-    </>
+      {loading && (
+        <p className="animate-bounce mx-auto h-8 w-8 shadow-xl bottom-0 absolute left-[39%] md:left-[47%]">
+          Loading...
+        </p>
+      )}
+    </div>
   );
 }
 
