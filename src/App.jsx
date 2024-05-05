@@ -1,11 +1,13 @@
 import "./App.css";
-import Card from "./components/Card/Card";
+import CardWrap from "./components/CardWrap.jsx";
+import Filter from "./components/Filter/Filter";
 
 function App() {
   return (
     <div>
       <h2>Hello WeekDay!</h2>
-      {<Card />}
+      {<CardWrap />}
+      {/* {<Card />} */}
     </div>
   );
 }
