@@ -15,7 +15,7 @@ function CardWrap() {
 
   useEffect(() => {
     getData();
-  }, [state.role, loading]);
+  }, []);
 
   const getData = () => {
     if (!loading && hasMoreData) {
@@ -23,14 +23,7 @@ function CardWrap() {
       instance
         .post(url, { limit: limit, offset: offset })
         .then((res) => {
-          let newJobs = res.data.jdList;
-          if (state.role !== "All") {
-            newJobs = newJobs.filter(
-              (job) => job.jobRole[0] == state.role.toLowerCase()[0]
-            );
-            setJobs((prevJobs) => [...prevJobs, ...newJobs]);
-          }
-          // setJobs((prevJobs) => [...prevJobs, ...res.data.jdList]);
+          setJobs((prevJobs) => [...prevJobs, ...res.data.jdList]);
           setOffset((prevOffset) => prevOffset + limit);
           setHasMoreData(res.data.jdList.length === limit);
           setLoading(false);
@@ -45,6 +38,7 @@ function CardWrap() {
 
   useEffect(() => {
     const handleScroll = () => {
+      //Checking if the customer has reached at the bottom (to fetch data)
       if (
         window.innerHeight + document.documentElement.scrollTop >=
         document.documentElement.offsetHeight - 2
@@ -57,32 +51,17 @@ function CardWrap() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [getData]);
 
-  // useEffect(() => {
-  //   // instance
-  //   //   .post(url, { limit: limit, offset: offset })
-  //   //   .then((res) => {
-  //   //     setOffset((prevOffset) => prevOffset + limit);
-  //   //     setHasMoreData(res.data.jdList.length === limit);
-  //   //     let filtered = res.data.jdList.filter(
-  //   //       (job) => job.jobRole[0] == state.role.toLowerCase()[0]
-  //   //     );
-
-  //   //     setJobs(filtered);
-  //   //   })
-  //   //   .catch((err) => {
-  //   //     console.log(err);
-  //   //   });
-  //   let filtered = jobs.filter(
-  //     (job) => job.jobRole[0] == state.role.toLowerCase()[0]
-  //   );
-  //   setJobs(filtered);
-  // }, [state.role]);
-
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4  gap-6 lg:px-10 px-5 py-5">
-      {jobs?.map((job, idx) => (
-        <Card key={idx} job={job} />
-      ))}
+      {jobs
+        .filter((item) => {
+          return state.search.toLowerCase() == ""
+            ? item
+            : item.companyName.toLowerCase().includes(state.search);
+        })
+        .map((job, idx) => (
+          <Card key={idx} job={job} />
+        ))}
       {loading && (
         <p className="animate-bounce mx-auto h-8 w-8 shadow-xl bottom-0 absolute left-[39%] md:left-[47%]">
           Loading...

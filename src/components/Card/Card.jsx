@@ -1,4 +1,9 @@
+import Modal from "../Modal/Modal";
+import { useState } from "react";
+
 function Card({ job }) {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div className="border w-full p-3 text-left pt-5 text-sm rounded-xl capitalize shadow-lg hover:scale-[1.02] transition-all">
       <div className="flex text-left items-center gap-3">
@@ -31,8 +36,13 @@ function Card({ job }) {
         </h3>
         <h4 className="font-semibold my-1">About us</h4>
         <p className="text-start mb-4 text-[15px]">
-          {job?.jobDetailsFromCompany.slice(300)}
-          {job?.jobDetailsFromCompany.length}
+          {job?.jobDetailsFromCompany.slice(0, 223) + "..."}
+          <em
+            onClick={() => setShowModal(true)}
+            className="text-[14px] opacity-90 lowercase underline underline-offset-4 px-1"
+          >
+            expand
+          </em>
         </p>
       </div>
       <div className="text-start">
@@ -44,6 +54,7 @@ function Card({ job }) {
           ⚡Easy Apply
         </button>
       </div>
+      {showModal && <Modal job={job} onClose={() => setShowModal(false)} />}
     </div>
   );
 }

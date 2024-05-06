@@ -36,7 +36,7 @@ function Filter() {
           onChange={(e) => handleChange(e, "role")}
           className="block text-sm appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
         >
-          <option value="" disabled hidden>
+          <option defaultValue="All" disabled hidden>
             Roles
           </option>
           <option value="All">All</option>
@@ -61,7 +61,7 @@ function Filter() {
           onChange={(e) => handleChange(e, "experience")}
           className="block appearance-none w-full text-sm bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
         >
-          <option selected disabled>
+          <option value="" disabled>
             Experience
           </option>
           <option value="1 years">1 YOE</option>
@@ -91,7 +91,7 @@ function Filter() {
           onChange={(e) => handleChange(e, "type")}
           className="block text-sm appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
         >
-          <option value="" selected disabled hidden>
+          <option value="" disabled hidden>
             Job Type
           </option>
           <option value="remote">Remote</option>
@@ -115,7 +115,7 @@ function Filter() {
           onChange={(e) => handleChange(e, "salary")}
           className="block text-sm appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
         >
-          <option value="" selected disabled hidden>
+          <option value="" disabled hidden>
             Minimum Salary
           </option>
           <option value="0-50,000">0-50,000</option>
