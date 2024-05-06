@@ -6,7 +6,7 @@ export default function BasicModal({ job, onClose }) {
   return (
     <div>
       <Modal open={onClose} onClose={onClose}>
-        <Box className="p-4 capitalize rounded-xl max-sm:bg-red-400 outline-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[400px]">
+        <Box className="p-4 capitalize rounded-xl outline-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[400px]">
           <div className="flex text-left items-center gap-3">
             <img
               src={job?.logoUrl}
