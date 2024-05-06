@@ -1,12 +1,16 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { IoIosCloseCircle } from "react-icons/io";
 
 export default function BasicModal({ job, onClose }) {
   return (
     <div>
       <Modal open={onClose} onClose={onClose}>
         <Box className="p-4 capitalize rounded-xl outline-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white w-[400px]">
+          <span onClick={onClose} className="flex justify-end p-0 m-0">
+            <IoIosCloseCircle fill="gray" fontSize={30} />
+          </span>
           <div className="flex text-left items-center gap-3">
             <img
               src={job?.logoUrl}
